@@ -26,6 +26,7 @@ This project covers DVA-C02 exam topics, including:
 - **Terraform** (>= 1.5.0)
 - **AWS CLI** (>= 2.0)
 - **LocalStack** (for local testing)
+- **awslocal** (Wrapper around AWS CLI for local testing with LocalStack)
 - **Docker** (for LocalStack and NGINX)
 - **Node.js** (for Lambda function packaging)
 - **GitHub Account** (for CI/CD pipeline)

@@ -30,10 +30,7 @@ provider "aws" {
 
 # S3 bucket to test LocalStack
 resource "aws_s3_bucket" "test_bucket" {
-  bucket = "test-bucket-${var.region}"
-
-  # Only create the bucket if LocalStack is enabled
-  count = var.localstack_enabled ? 1 : 0
+  bucket = "test-bucket-${var.naming_suffix}"
 
   tags = {
     Name        = "Test Bucket"

@@ -26,7 +26,7 @@ tasks:
     cmds:
       - echo "Deploying infrastructure..."
       - terraform init
-      - terraform apply -auto-approve -var localstack_enabled=true
+      - terraform apply -auto-approve -var-file=environments/localstack.tfvars
       - echo "Infrastructure deployed."
 
   destroy:infrastructure:
@@ -34,6 +34,6 @@ tasks:
     dir: app/infrastructure
     cmds:
       - echo "Destroying infrastructure..."
-      - terraform destroy -auto-approve -var localstack_enabled=true
+      - terraform destroy -auto-approve -var-file=environments/localstack.tfvars
       - rm -rf .terraform && rm -rf .terraform.lock.hcl && rm -rf terraform.tfstate*
       - echo "Infrastructure destroyed."
