@@ -3,6 +3,8 @@
 .env.*
 !.env.example
 
+# -- Localstack .gitignore file for ignoring localstack specific files and directories --
+localstack/localstack_volume
 
 # -- Terraform .gitignore file for ignoring Terraform specific files and directories --
 # Local .terraform directories

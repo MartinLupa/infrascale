@@ -5,7 +5,7 @@ tasks:
     desc: "Setup LocalStack. This task will create a localstack volume and start the localstack container. This task is a pre-requisite for any other task that requires localstack."
     cmds:
       - echo "Setting up LocalStack..."
-      - docker-compose -f localstack/docker-compose.yml up -d
+      - docker-compose -f localstack/compose.yml up -d
       - echo "LocalStack is running on http://localhost:4566"
     env:
       LOCALSTACK_VOLUME_DIR: "./localstack_volume"
@@ -15,7 +15,7 @@ tasks:
     desc: "Teardown LocalStack"
     cmds:
       - echo "Stopping LocalStack..."
-      - docker-compose -f localstack/docker-compose.yml down
+      - docker-compose -f localstack/compose.yml down
       - echo "Removing LocalStack local files..."
       - rm -rf ./localstack/localstack_volume
       - echo "LocalStack has been stopped."
