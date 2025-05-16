@@ -1,0 +1,39 @@
+version: '3'
+
+tasks:
+  setup:localstack:
+    desc: "Setup LocalStack. This task will create a localstack volume and start the localstack container. This task is a pre-requisite for any other task that requires localstack."
+    cmds:
+      - echo "Setting up LocalStack..."
+      - docker-compose -f localstack/docker-compose.yml up -d
+      - echo "LocalStack is running on http://localhost:4566"
+    env:
+      LOCALSTACK_VOLUME_DIR: "./localstack_volume"
+      DEBUG: "1"
+      
+  teardown:localstack:
+    desc: "Teardown LocalStack"
+    cmds:
+      - echo "Stopping LocalStack..."
+      - docker-compose -f localstack/docker-compose.yml down
+      - echo "Removing LocalStack local files..."
+      - rm -rf ./localstack/localstack_volume
+      - echo "LocalStack has been stopped."
+
+  deploy:infrastructure:
+    desc: "Deploy infrastructure using Terraform"
+    dir: app/infrastructure
+    cmds:
+      - echo "Deploying infrastructure..."
+      - terraform init
+      - terraform apply -auto-approve -var localstack_enabled=true
+      - echo "Infrastructure deployed."
+
+  destroy:infrastructure:
+    desc: "Destroy infrastructure using Terraform"
+    dir: app/infrastructure
+    cmds:
+      - echo "Destroying infrastructure..."
+      - terraform destroy -auto-approve -var localstack_enabled=true
+      - rm -rf .terraform && rm -rf .terraform.lock.hcl && rm -rf terraform.tfstate*
+      - echo "Infrastructure destroyed."
