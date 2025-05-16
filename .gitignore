@@ -1,4 +1,5 @@
 # -- Project .gitignore file for ignoring files and directories --
+.env
 .env.*
 !.env.example
 
