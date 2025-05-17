@@ -36,11 +36,8 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Workspace
-      run: terraform workspace select dev || terraform workspace new dev
-
     - name: Terraform Plan
-      run: terraform plan -var-file=./environments/pr.tfvars -out=tfplan
+      run: terraform plan -var-file=environments/pr.tfvars -out=tfplan
 
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
