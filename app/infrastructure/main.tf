@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "test_bucket" {
   bucket = "test-bucket-${var.naming_suffix}"
 
   tags = {
-    Name        = "Test Bucket"
+    Name        = "Test Dev Bucket"
     Environment = "LocalStack"
   }
 }
