@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - master
+      
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
@@ -12,6 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: CD to app
+      run: cd app/infrastructure
+      shell: bash
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -32,7 +40,7 @@ jobs:
       run: terraform workspace select dev || terraform workspace new dev
 
     - name: Terraform Plan
-      run: terraform plan -var-file=./app/environments/pr.tfvars -out=tfplan
+      run: terraform plan -var-file=./environments/pr.tfvars -out=tfplan
 
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
