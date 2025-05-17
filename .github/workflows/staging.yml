@@ -27,11 +27,9 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-
-    - name: Terraform Workspace
-      run: terraform workspace select staging || terraform workspace new staging
-
+      
     - name: Terraform Plan
+      # Recommended to use S3 or secret store for tfvars
       run: terraform plan -var-file=staging.tfvars -out=tfplan
 
     - name: Terraform Apply

@@ -37,7 +37,8 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan -var-file=./environments/pr.tfvars -out=tfplan
+      # Recommended to use S3 or secret store for tfvars
+      run: terraform plan -var-file=pr.tfvars -out=tfplan
 
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
