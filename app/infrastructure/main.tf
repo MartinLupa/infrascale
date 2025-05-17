@@ -29,7 +29,7 @@ provider "aws" {
 }
 
 # S3 bucket to test LocalStack
-resource "aws_s3_bucket" "test_bucket" {
+resource "aws_s3_bucket" "test_dev_bucket" {
   bucket = "test-bucket-${var.naming_suffix}"
 
   tags = {
